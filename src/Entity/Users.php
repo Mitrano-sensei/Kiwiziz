@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,6 +30,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Quiz::class)]
+    private Collection $quizzes;
+
+    #[ORM\OneToMany(mappedBy: 'player', targetEntity: Score::class, orphanRemoval: true)]
+    private Collection $scores;
+
+    public function __construct()
+    {
+        $this->quizzes = new ArrayCollection();
+        $this->scores = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,5 +111,65 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Quiz>
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes->add($quiz);
+            $quiz->setCreator($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->removeElement($quiz)) {
+            // set the owning side to null (unless already changed)
+            if ($quiz->getCreator() === $this) {
+                $quiz->setCreator(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Score>
+     */
+    public function getScores(): Collection
+    {
+        return $this->scores;
+    }
+
+    public function addScore(Score $score): self
+    {
+        if (!$this->scores->contains($score)) {
+            $this->scores->add($score);
+            $score->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScore(Score $score): self
+    {
+        if ($this->scores->removeElement($score)) {
+            // set the owning side to null (unless already changed)
+            if ($score->getPlayer() === $this) {
+                $score->setPlayer(null);
+            }
+        }
+
+        return $this;
     }
 }
