@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Quiz;
+use App\Entity\Quizz;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Quiz>
+ * @extends ServiceEntityRepository<Quizz>
  *
- * @method Quiz|null find($id, $lockMode = null, $lockVersion = null)
- * @method Quiz|null findOneBy(array $criteria, array $orderBy = null)
- * @method Quiz[]    findAll()
- * @method Quiz[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Quizz|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Quizz|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Quizz[]    findAll()
+ * @method Quizz[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class QuizRepository extends ServiceEntityRepository
+class QuizzRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Quiz::class);
+        parent::__construct($registry, Quizz::class);
     }
 
-    public function save(Quiz $entity, bool $flush = false): void
+    public function save(Quizz $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class QuizRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Quiz $entity, bool $flush = false): void
+    public function remove(Quizz $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class QuizRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Quiz[] Returns an array of Quiz objects
+//     * @return Quizz[] Returns an array of Quizz objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class QuizRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Quiz
+//    public function findOneBySomeField($value): ?Quizz
 //    {
 //        return $this->createQueryBuilder('q')
 //            ->andWhere('q.exampleField = :val')
