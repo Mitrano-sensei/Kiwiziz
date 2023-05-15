@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Profile
+{% endblock %}
+
+{% block body %}
+	<h1>Your Username :
+		{{ username }}</h1>
+
+	<a href="{{ path('app_change_password') }}">Change Password</a>
+	<a href="{{ path('app_home') }}">Back to homepage</a>
+
+{% endblock %}
