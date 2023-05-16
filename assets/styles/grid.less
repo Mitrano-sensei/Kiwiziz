@@ -2,15 +2,28 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    background-color: crimson;
 
     .btnAdd-container {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        margin-bottom: 1rem;
+        margin: 0 0 1rem 50px;
+
+        .btnAdd {
+            .btnAdd-img {
+                width: 100px;
+                height: auto;
+                border-radius: 100px;
+                padding: 0px 0px 0px 0px;
+                box-shadow: 3px 2px 5px 2px #222222de;
+
+                &:hover {
+                    &:extend(.hover);
+                }
+            }
+        }
     }
 
     .content-container {
@@ -19,76 +32,154 @@
         flex-wrap: nowrap;
         justify-content: flex-start;
         align-items: center;
-        margin-bottom: 1rem;
+
+        margin: 0 10px 1rem 10px;
 
         .items-container {
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+
+            width: 100%;
+            height: auto;
+            margin: 0 15px 1rem 15px;
+
         }
 
         .paginate-container {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 1rem;
+
+            width: 100%;
+            height: auto;
+
+            &>ul {
+                width: 100%;
+                height: auto;
+
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+
+                list-style-type: none;
+
+                &>li {
+                    margin: 0 25px;
+
+                    & > a {
+                        font-size: 1.3rem;
+
+                        &:hover {
+                            font-size: 1.4rem;
+                        }
+                    }
+                }
+
+                & > li.active-page{
+                    & > a {
+                        color: darken(@link-color, 30%);
+                        font-weight: bold;
+                    }
+                }
+            }
         }
     }
 
 }
 
 .item-container {
-    background-color: limegreen;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 1rem;
 
-    .item-delete-container {
-        .item-delete-link {
+    width: 95%;
+    height: auto;
 
+    box-shadow: 3px 2px 10px 3px #222222de;
+    border-radius: 9px;
+    margin: 15px 15px 25px 15px;
+
+    &:hover {
+        &:extend(.hover);
+    }
+
+    &>div {
+        width: fit-content;
+        height: auto;
+
+        text-align: center;
+    }
+
+    & img {
+        max-width: 50px;
+        box-shadow: unset;
+        padding: 25px;
+        vertical-align: top;
+
+        margin: 0px;
+
+        &:hover {
+            &:extend(.hover);
         }
+    }
+
+    .item-delete-container {
+        flex: 1 1 auto;
+
+        .item-delete-link {}
     }
 
     .item-edit-container {
-        .item-edit-link {
+        flex: 1 1 auto;
 
-        }
+        .item-edit-link {}
     }
-    
+
     .item-play-container {
-        .item-play-link {
+        flex: 1 1 auto;
 
+        .item-play-link {}
+    }
+
+    .item-title-container {
+        flex: 2 1 auto;
+
+        &:hover {
+            &:extend(.hover);
+        }
+
+        .item-title {
+            font-size: 1.5rem;
         }
     }
 
-    .item-title-container
-    {
+    .item-score-container {
+        flex: 1 1 auto;
 
-    }
+        &:hover {
+            &:extend(.hover);
+        }
 
-    .item-score-container
-    {
-
-    }
-
-    .item-list-container{
-        .item-list-link{
-
+        .item-score {
+            font-size: 1.5rem;
         }
     }
 
-    .item-ranking-container{
-        .item-ranking-link{
+    .item-list-container {
+        flex: 1 1 auto;
 
-        }
+        .item-list-link {}
+    }
+
+    .item-ranking-container {
+        flex: 1 1 auto;
+
+        .item-ranking-link {}
     }
 
 

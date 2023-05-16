@@ -6,7 +6,7 @@
 	<div class="btnAdd-container">
 		{% block btnAdd %}
 			<a href="grid_add" class="btnAdd">
-				<span class="fa-plus btnAdd-icon">Add</span>
+			<img src="src/add.png" alt="add" class="btnAdd-img">
 			</a>
 		{% endblock %}
 	</div>		
@@ -23,7 +23,7 @@
 		{# to change : link to add the number #}
 		{% set paginateBase = "/blog/p" %}
 		{# to change : the structure for the paginate #}
-		{% set pageInfo = { totalPages : 2, currentPage : 2, prevUrl : "/ggg/g", nextUrl : "/ggg/g", total:5} %}
+		{% set pageInfo = { totalPages : 2, currentPage : 1, prevUrl : "/ggg/g", nextUrl : "/ggg/g", total:5} %}
 		{% if pageInfo.totalPages > 1 %}
 			<ul>
 				{% for pageNumber in 1..pageInfo.totalPages %}
