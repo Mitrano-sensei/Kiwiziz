@@ -1,0 +1,30 @@
+<div class="app_bar">
+	<a href="home" class="logo-link">
+		<img src="src/logo.png" alt="logo" class="logo">
+	</a>
+	<div class="profil-container">
+			<a alt="profil" href "profil" class="profil">
+				<img src="profil/img_url" alt="logo" class="logo">
+			</a>
+			<a alt="signin" href="login" class="signin">Sign in</a>
+			<a alt="signup" href="register" class="signup">Sign up</a>
+	</div>
+</div>
+
+{# 
+<div class="app_bar">
+	<a href="{{ path('home') }}" class="logo-link">
+		<img src="{{ asset('src/logo.png') }}" alt="logo" class="logo">
+	</a>
+	<div class="profil-container">
+		{% if path('user/connected') %}
+			<a alt="profil" href "{{ path('profil') }}" class="profil">
+				<img src="{{ asset(path('profil/img_url')) }}" alt="logo" class="logo">
+			</a>
+		{% else %}
+			<a alt="signin" href="{{ path('login') }}" class="signin">Sign in</a>
+			<a alt="signup" href="{{ path('register') }}" class="signup">Sign up</a>
+		{% endif %}
+	</div>
+</div>
+#}

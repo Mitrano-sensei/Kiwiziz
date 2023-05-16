@@ -1,0 +1,32 @@
+{% set q = questions|filter(q => q.id == question.id) %}
+
+<div class="question-container">
+
+	<div class="question-title-container">
+		<input type="text" name="questionTitle{{question.id}}" class="title-field" value="{{ q|column('title')[0] }}" placeholder="Title">
+	</div>
+
+	<div class="image-container">
+		<input type="file" name="image{{question.id}}" class="image-field" value="{{ q|column('image')[0] }}" placeholder="Image">
+	</div>
+
+	<div class="answers-container">
+		{% for answer in q|column('answers')[0] %}
+			<div class="answer-container">
+            {% if q|column('type')[0] == "list" %}
+				<input type="text" name="answer{{question.id}}" class="answer-field" value="{{ answer.title }}" placeholder="Answer">
+				<input type="checkbox" name="correct{{question.id}}" class="correct-field" value="correct" {% if answer.correct %} checked {% endif %}>
+            {% elseif q|column('type')[0] == "image" %}
+                <input type="file" name="answer{{question.id}}" class="answer-field" value="{{ answer.title }}" placeholder="Answer">
+            {% endif %}
+			</div>
+		{% endfor %}
+	</div>
+
+
+	<div class="adding-answer">
+		<a href="addanswer" class="add-answer-link">
+			<img src="src/Answer.png" class="add-answer-icon">
+		</a>
+
+	</div>
