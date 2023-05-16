@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\QuestionRepository;
 
 class CreateQuizController extends AbstractController
 {
@@ -20,10 +21,11 @@ class CreateQuizController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $quiz = $form->getData();
-            $quiz->setCreator($this->getUser());
+            $quizz = $form->getData();
+            $quizz->setAuthor($this->getUser());
+            $quizz->setCreated(new \DateTime());
 
-            $entityManager->persist($quiz);
+            $entityManager->persist($quizz);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_home');
