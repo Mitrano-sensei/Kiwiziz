@@ -21,7 +21,8 @@ class CreateQuizController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $quiz = $form->getData();
-            $quiz->setCreator($this->getUser());
+            $quiz->setAuthor($this->getUser());
+            $quiz->setCreated(new \DateTime());
 
             $entityManager->persist($quiz);
             $entityManager->flush();
