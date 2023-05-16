@@ -5,15 +5,14 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\SecurityBundle\Security;
 
-class HomeController extends AbstractController
+class QuizController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/quiz', name: 'app_quiz')]
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+        return $this->render('quiz/quiz.html.twig', [
+            'controller_name' => 'QuizController',
         ]);
     }
 }

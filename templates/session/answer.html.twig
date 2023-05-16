@@ -1,0 +1,15 @@
+<div class="answer-container">
+
+	{% if questionType == "slider" %}
+		{# slider TODO #}
+	{% elseif questionType == "image" %}
+		<img src="{{ answer.image }}" class="answer-image" alt="{{ answer.title }}">
+	{% else %}
+		{# "list" of radiobutton #}
+		<div class="answer-radio">
+			<input type="radio" id="answer-{{ answer.id }}" name="answer" value="{{ answer.id }}">
+			<label for="answer-{{ answer.id }}">{{ answer.title }}</label>
+		</div>
+	{% endif %}
+
+</div>
