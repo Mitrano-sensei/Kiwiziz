@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+List of all quizz
+{% endblock %}
+
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Theme</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quizz in allQuizz %}
+                <tr>
+                    <td>{{ quizz.id }}</td>
+                    <td>{{ quizz.theme }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+{% endblock %}
