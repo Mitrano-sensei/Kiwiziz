@@ -26,7 +26,7 @@ class CreateQuizController extends AbstractController
             $entityManager->persist($quiz);
             $entityManager->flush();
 
-            $logger->info('Quiz created by ' . $this->getUser()->getUsername());
+            //$logger->info('Quiz created by ' . $this->getUser()->getUsername());
             $logger->info('Quiz theme: ' . $quiz->getTheme() . ', date: ' . $quiz->getDate()->format('Y-m-d H:i:s') . ', id: ' . $quiz->getId() . ', creator: ' . $quiz->getCreator()->getUsername() . '.');
 
             return $this->redirectToRoute('app_home');
