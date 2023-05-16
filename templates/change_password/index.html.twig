@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChangePasswordController!
+{% endblock %}
+
+{% block body %}
+
+	{{ form_start(changePasswordForm) }}
+	{{ form_row(changePasswordForm.oldPassword) }}
+	{{ form_row(changePasswordForm.newPassword) }}
+
+
+	<button type="submit" class="btn">Submit</button>
+	{{ form_end(changePasswordForm) }}
+
+    <a href="{{ path('app_change_profile') }}">Back to Profile</a>
+    <a href="{{ path('app_home') }}">Back to homepage</a>
+{% endblock %}
