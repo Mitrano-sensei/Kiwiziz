@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\QuizFormType;
+use App\Form\QuizzFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,7 @@ class CreateQuizController extends AbstractController
     #[Route('/create/quiz', name: 'app_create_quiz')]
     public function createQuiz(Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
-        $form = $this->createForm(QuizFormType::class);
+        $form = $this->createForm(QuizzFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuestionRepository::class)]
@@ -13,98 +15,181 @@ class Question
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $question = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $goodAnswer = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $badAnswer1 = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $badAnswer2 = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $badAnswer3 = null;
+    #[ORM\ManyToMany(targetEntity: Quizz::class, inversedBy: 'questions')]
+    private Collection $quizz;
 
     #[ORM\ManyToOne(inversedBy: 'questions')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Quiz $quiz = null;
+    private ?QuestionType $type = null;
+
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'questions')]
+    private Collection $tag;
+
+    #[ORM\Column(length: 255)]
+    private ?string $text = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, orphanRemoval: true)]
+    private Collection $answers;
+
+    #[ORM\OneToMany(mappedBy: 'question', targetEntity: SessionQuestion::class)]
+    private Collection $sessionQuestions;
+
+    public function __construct()
+    {
+        $this->quizz = new ArrayCollection();
+        $this->tag = new ArrayCollection();
+        $this->answers = new ArrayCollection();
+        $this->sessionQuestions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getQuestion(): ?string
+    /**
+     * @return Collection<int, Quizz>
+     */
+    public function getQuizz(): Collection
     {
-        return $this->question;
+        return $this->quizz;
     }
 
-    public function setQuestion(string $question): self
+    public function addQuizz(Quizz $quizz): self
     {
-        $this->question = $question;
+        if (!$this->quizz->contains($quizz)) {
+            $this->quizz->add($quizz);
+        }
 
         return $this;
     }
 
-    public function getGoodAnswer(): ?string
+    public function removeQuizz(Quizz $quizz): self
     {
-        return $this->goodAnswer;
-    }
-
-    public function setGoodAnswer(string $goodAnswer): self
-    {
-        $this->goodAnswer = $goodAnswer;
+        $this->quizz->removeElement($quizz);
 
         return $this;
     }
 
-    public function getBadAnswer1(): ?string
+    public function getType(): ?QuestionType
     {
-        return $this->badAnswer1;
+        return $this->type;
     }
 
-    public function setBadAnswer1(string $badAnswer1): self
+    public function setType(?QuestionType $type): self
     {
-        $this->badAnswer1 = $badAnswer1;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getBadAnswer2(): ?string
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTag(): Collection
     {
-        return $this->badAnswer2;
+        return $this->tag;
     }
 
-    public function setBadAnswer2(string $badAnswer2): self
+    public function addTag(Tag $tag): self
     {
-        $this->badAnswer2 = $badAnswer2;
+        if (!$this->tag->contains($tag)) {
+            $this->tag->add($tag);
+        }
 
         return $this;
     }
 
-    public function getBadAnswer3(): ?string
+    public function removeTag(Tag $tag): self
     {
-        return $this->badAnswer3;
-    }
-
-    public function setBadAnswer3(string $badAnswer3): self
-    {
-        $this->badAnswer3 = $badAnswer3;
+        $this->tag->removeElement($tag);
 
         return $this;
     }
 
-    public function getQuiz(): ?Quiz
+    public function getText(): ?string
     {
-        return $this->quiz;
+        return $this->text;
     }
 
-    public function setQuiz(?Quiz $quiz): self
+    public function setText(string $text): self
     {
-        $this->quiz = $quiz;
+        $this->text = $text;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Answer>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
+            $answer->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getQuestion() === $this) {
+                $answer->setQuestion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SessionQuestion>
+     */
+    public function getSessionQuestions(): Collection
+    {
+        return $this->sessionQuestions;
+    }
+
+    public function addSessionQuestion(SessionQuestion $sessionQuestion): self
+    {
+        if (!$this->sessionQuestions->contains($sessionQuestion)) {
+            $this->sessionQuestions->add($sessionQuestion);
+            $sessionQuestion->setQuestion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSessionQuestion(SessionQuestion $sessionQuestion): self
+    {
+        if ($this->sessionQuestions->removeElement($sessionQuestion)) {
+            // set the owning side to null (unless already changed)
+            if ($sessionQuestion->getQuestion() === $this) {
+                $sessionQuestion->setQuestion(null);
+            }
+        }
 
         return $this;
     }
