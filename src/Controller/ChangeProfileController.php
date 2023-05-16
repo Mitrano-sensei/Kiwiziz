@@ -13,8 +13,6 @@ class ChangeProfileController extends AbstractController
     #[Route('/change/profile', name: 'app_change_profile')]
     public function index(Security $security): Response
     {
-        Utils::verifyIfConnected($this, $security);
-
         return $this->render('change_profile/index.html.twig', [
             'username' => $this->getUser()->getUserIdentifier(),
         ]);

@@ -18,8 +18,6 @@ class SessionController extends AbstractController
     #[Route('/session', name: 'app_session')]
     public function createQuiz(Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger, Security $security): Response
     {
-        Utils::verifyIfConnected($this, $security);
-
         $form = $this->createForm(QuizzFormType::class);
         $form->handleRequest($request);
 

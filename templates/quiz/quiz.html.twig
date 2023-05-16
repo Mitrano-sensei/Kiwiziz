@@ -64,23 +64,28 @@
 
 {% block body %}
 
-	<form action="quizz" method="post">
+	<form action="quizz" class="quizz" method="post">
 
 		<div class="title-container">
 			<input type="text" name="quizzTitle" class="title-field" value="{{ quizzTitle }}" placeholder="Title">
 		</div>
 
 		{% for question in questions %}
-			{% include "quiz/question.html.twig" %}
-			<div class="adding-question">
-				<a href="addQuestion" class="add-question-link">
-					<img src="src/add.png" class="add-question-icon">
-				</a>
+			<div class="question-container">
+				{% include "quiz/question.html.twig" %}
+				<div class="adding-question">
+					<span class="add-question-link">
+                        Add question :
+						<img src="src/add.png" class="add-question-icon">
+					</span>
 
-				<div class="question-type-container">
-                    <input type="radio" name="questionType" class="question-type" value="image">
-                    <input type="radio" name="questionType" class="question-type" value="list">
-                </div>
+					<div class="question-type-container">
+						<input type="radio" name="questionType{{question.id}}" id="image{{question.id}}" class="question-type" value="image">
+						<label for="image{{question.id}}">Image</label>
+						<input type="radio" name="questionType{{question.id}}" id="list{{question.id}}" class="question-type" value="list">
+						<label for="list{{question.id}}">List</label>
+					</div>
+				</div>
 			</div>
 		{% endfor %}
 
