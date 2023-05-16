@@ -1,0 +1,33 @@
+<div class="grid">
+	<div class="btnAdd-container">
+		{% block btnAdd %}
+			<a href="grid_add" class="btnAdd">
+				<span class="fa-plus btnAdd-icon">Add</span>
+			</a>
+		{% endblock %}
+
+	<div class="content-container">
+	<div class="items-container">
+		{% for item in items %}
+			{% include "grid/item.html.twig" %}
+		{% endfor %}
+	</div>
+
+	<div class="paginate-container">
+		{# to change : link to add the number #}
+		{% set paginateBase = "/blog/p" %}
+		{# to change : the structure for the paginate #}
+		{% set pageInfo = { totalPages : 2, currentPage : 2, prevUrl : "/ggg/g", nextUrl : "/ggg/g", total:5} %}
+		{% if pageInfo.totalPages > 1 %}
+			<ul>
+				{% for pageNumber in 1..pageInfo.totalPages %}
+					<li class="paginate-item {% if pageInfo.currentPage == pageNumber %} active-page {% endif %}">
+						<a href="{{ paginateBase ~ pageNumber }}" class="paginate-link">{{ pageNumber }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+	</div>
+
+</div>
