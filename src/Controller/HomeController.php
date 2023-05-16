@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Helpers\Utils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,12 +13,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(Security $security): Response
     {
-        $connected = $security->isGranted('IS_AUTHENTICATED_FULLY');
-
-        if (!$connected)
-        {
-            return $this->redirectToRoute('app_login');
-        }
+        Utils::verifyIfConnected($this, $security);
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',

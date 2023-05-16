@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% set quizzTitle = "title" %}
+{% set questionTitle = "title" %}
+{% set questionTitle = "list" %}
+
+
+<div class="title-container">
+    <span class = "title">
+        {{ quizzTitle}}
+    </span>
+</div>
+
+<div class="content-container">
+    <img src="src/1.png" alt="image" class="question-image">
+    <span class = "question-title">
+        {{ questionTitle}}
+    </span>
+    {% switch questionType %}
+    
+        {% case "list" %}
+        
+    
+        {% case "image" %}
+        
+    
+        {% default %} {# list #}
+        
+    
+    {% endswitch %}
+    
+</div>
+
+<div class="title-container">
+    <span class = "title">
+        {{ questionTitle}}
+    </span>
+</div>
