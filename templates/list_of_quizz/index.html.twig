@@ -8,15 +8,15 @@ List of all quizz
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Theme</th>
+                <th>Creator username</th>
             </tr>
         </thead>
         <tbody>
             {% for quizz in allQuizz %}
                 <tr>
-                    <td>{{ quizz.id }}</td>
                     <td>{{ quizz.theme }}</td>
+                    <td>{{ quizz.creator.username }}</td>
                 </tr>
             {% endfor %}
         </tbody>
