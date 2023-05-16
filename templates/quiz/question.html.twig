@@ -1,32 +1,42 @@
 {% set q = questions|filter(q => q.id == question.id) %}
 
-<div class="question-container">
+<div class="q-container">
 
 	<div class="question-title-container">
-		<input type="text" name="questionTitle{{question.id}}" class="title-field" value="{{ q|column('title')[0] }}" placeholder="Title">
+		<input type="text" name="questionTitle{{question.id}}" class="question-title-field" value="{{ q|column('title')[0] }}" placeholder="Title">
 	</div>
 
 	<div class="image-container">
+		<label for="image{{question.id}}" class="image-label">Background Image :
+		</label>
 		<input type="file" name="image{{question.id}}" class="image-field" value="{{ q|column('image')[0] }}" placeholder="Image">
 	</div>
 
 	<div class="answers-container">
 		{% for answer in q|column('answers')[0] %}
 			<div class="answer-container">
-            {% if q|column('type')[0] == "list" %}
-				<input type="text" name="answer{{question.id}}" class="answer-field" value="{{ answer.title }}" placeholder="Answer">
+				{% if q|column('type')[0] == "list" %}
+					<label for="answer{{question.id}}" class="answer-label">Answer :
+					</label>
+					<input type="text" name="answer{{question.id}}" class="answer-field" value="{{ answer.title }}" placeholder="Answer">
+				{% elseif q|column('type')[0] == "image" %}
+					<label for="answer{{question.id}}" class="answer-label">Answer :
+					</label>
+					<input type="file" name="answer{{question.id}}" class="answer-field" value="{{ answer.title }}" placeholder="Answer">
+				{% endif %}
 				<input type="checkbox" name="correct{{question.id}}" class="correct-field" value="correct" {% if answer.correct %} checked {% endif %}>
-            {% elseif q|column('type')[0] == "image" %}
-                <input type="file" name="answer{{question.id}}" class="answer-field" value="{{ answer.title }}" placeholder="Answer">
-            {% endif %}
+				<label for="correct{{question.id}}" class="correct-label">Is Correct</label>
 			</div>
 		{% endfor %}
 	</div>
 
 
 	<div class="adding-answer">
+		<label for="add-answer-icon" class="add-answer-label">Add Answer : </label>
 		<a href="addanswer" class="add-answer-link">
-			<img src="src/Answer.png" class="add-answer-icon">
+			<img src="src/add2.png" class="add-answer-icon">
 		</a>
 
 	</div>
+
+</div>

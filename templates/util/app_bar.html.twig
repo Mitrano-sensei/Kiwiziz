@@ -1,13 +1,19 @@
+{% set userConnected = false %}
+
 <div class="app_bar">
-	<a href="home" class="logo-link">
+	<a href="{{ path('app_home') }}" class="logo-link">
 		<img src="src/logo.png" alt="logo" class="logo">
 	</a>
 	<div class="profil-container">
-			<a alt="profil" href "profil" class="profil">
-				<img src="profil/img_url" alt="logo" class="logo">
+		{% if userConnected %}
+			<a alt="profil" href "profil" class="profil-link">
+				<img src="profil/img_url" alt="logo" class="profil-logo">
 			</a>
+		{% else %}
 			<a alt="signin" href="login" class="signin">Sign in</a>
+			<span class="profil-separator">/</span>
 			<a alt="signup" href="register" class="signup">Sign up</a>
+			{% endif %}
 	</div>
 </div>
 

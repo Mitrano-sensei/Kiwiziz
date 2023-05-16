@@ -6,7 +6,25 @@
     align-items: center;
     align-content: center;
 
-    background-color: aquamarine;
+    background-color: @app-bar-bg-color;
+    min-height: 100px;
+    height: auto;
+    width: 100%;
+    box-shadow: 1px 2px 4px 0px #000;
+    border-radius: 9px;
+
+    margin: 0px 0px 15px 0px;
+
+    .logo-link {
+        margin: 0 10px;
+
+        .logo {
+            box-shadow: unset;
+            margin: auto;
+            width: 500px;
+            height: auto;
+        }
+    }
 
     .profil-container {
         display: flex;
@@ -15,5 +33,30 @@
         justify-content: space-between;
         align-items: center;
         align-content: center;
+
+        margin: 0 10px 0 0 ;
+
+        .profil-link{
+
+            .profil-logo {
+
+            }
+        }
+
+        a.signin {
+            margin: 0 10px;
+            color: @app-bar-text-color;
+            font-size: 1.2rem;
+        }
+
+        .profil-separator {
+            margin: 0 10px;
+        }
+
+        a.signup {
+            margin: 0 10px;
+            color: @app-bar-text-color;
+            font-size: 1.2rem;
+        }
     }
 }
