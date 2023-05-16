@@ -11,7 +11,11 @@ use Symfony\Bundle\SecurityBundle\Security;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
+<<<<<<< Updated upstream
     public function index(Security $security): Response
+=======
+    public function index(): Response
+>>>>>>> Stashed changes
     {
         Utils::verifyIfConnected($this, $security);
 
