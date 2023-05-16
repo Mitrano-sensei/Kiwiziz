@@ -31,16 +31,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Quiz::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Quizz::class, orphanRemoval: true)]
     private Collection $quizzes;
 
-    #[ORM\OneToMany(mappedBy: 'player', targetEntity: Score::class, orphanRemoval: true)]
-    private Collection $scores;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Session::class, orphanRemoval: true)]
+    private Collection $sessions;
 
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
-        $this->scores = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,29 +114,29 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Quiz>
+     * @return Collection<int, Quizz>
      */
     public function getQuizzes(): Collection
     {
         return $this->quizzes;
     }
 
-    public function addQuiz(Quiz $quiz): self
+    public function addQuiz(Quizz $quiz): self
     {
         if (!$this->quizzes->contains($quiz)) {
             $this->quizzes->add($quiz);
-            $quiz->setCreator($this);
+            $quiz->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeQuiz(Quiz $quiz): self
+    public function removeQuiz(Quizz $quiz): self
     {
         if ($this->quizzes->removeElement($quiz)) {
             // set the owning side to null (unless already changed)
-            if ($quiz->getCreator() === $this) {
-                $quiz->setCreator(null);
+            if ($quiz->getAuthor() === $this) {
+                $quiz->setAuthor(null);
             }
         }
 
@@ -144,29 +144,29 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Score>
+     * @return Collection<int, Session>
      */
-    public function getScores(): Collection
+    public function getSessions(): Collection
     {
-        return $this->scores;
+        return $this->sessions;
     }
 
-    public function addScore(Score $score): self
+    public function addSession(Session $session): self
     {
-        if (!$this->scores->contains($score)) {
-            $this->scores->add($score);
-            $score->setPlayer($this);
+        if (!$this->sessions->contains($session)) {
+            $this->sessions->add($session);
+            $session->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeScore(Score $score): self
+    public function removeSession(Session $session): self
     {
-        if ($this->scores->removeElement($score)) {
+        if ($this->sessions->removeElement($session)) {
             // set the owning side to null (unless already changed)
-            if ($score->getPlayer() === $this) {
-                $score->setPlayer(null);
+            if ($session->getUser() === $this) {
+                $session->setUser(null);
             }
         }
 

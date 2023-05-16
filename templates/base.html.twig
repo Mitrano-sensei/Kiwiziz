@@ -23,13 +23,27 @@
 			{{ encore_entry_script_tags('app') }}
 
 			<!-- Renders app.js & a webpack runtime.js file
-									                <script src="/build/runtime.js" defer></script>
-									                <script src="/build/app.js" defer></script>
-									                See note below about the "defer" attribute -->
+												                <script src="/build/runtime.js" defer></script>
+												                <script src="/build/app.js" defer></script>
+												                See note below about the "defer" attribute -->
 			<script src"/build/app.js" defer></script>
 		{% endblock %}
 	</head>
 	<body>
+		{% for label, flashes in app.session.flashbag.all %}
+			{% for flash in flashes %}
+				{% if ( label == 'success' ) %}
+					<div class="alert alert-success alert-dismissible fade show">
+						{{ flash }}
+					</div>
+				{% elseif ( label == 'error' ) %}
+					<div class="alert alert-danger alert-dismissible fade show">
+						{{ flash }}
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+
 		{% include 'util/app_bar.html.twig' %}
 		{% block body %}{% endblock %}
 	</body>

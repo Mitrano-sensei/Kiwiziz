@@ -4,23 +4,19 @@ namespace App\Controller;
 
 use App\Helpers\Utils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\SecurityBundle\Security;
 
-class HomeController extends AbstractController
+class ChangeProfileController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-<<<<<<< Updated upstream
+    #[Route('/change/profile', name: 'app_change_profile')]
     public function index(Security $security): Response
-=======
-    public function index(): Response
->>>>>>> Stashed changes
     {
         Utils::verifyIfConnected($this, $security);
 
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+        return $this->render('change_profile/index.html.twig', [
+            'username' => $this->getUser()->getUserIdentifier(),
         ]);
     }
 }

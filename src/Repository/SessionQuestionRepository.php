@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Score;
+use App\Entity\SessionQuestion;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Score>
+ * @extends ServiceEntityRepository<SessionQuestion>
  *
- * @method Score|null find($id, $lockMode = null, $lockVersion = null)
- * @method Score|null findOneBy(array $criteria, array $orderBy = null)
- * @method Score[]    findAll()
- * @method Score[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method SessionQuestion|null find($id, $lockMode = null, $lockVersion = null)
+ * @method SessionQuestion|null findOneBy(array $criteria, array $orderBy = null)
+ * @method SessionQuestion[]    findAll()
+ * @method SessionQuestion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ScoreRepository extends ServiceEntityRepository
+class SessionQuestionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Score::class);
+        parent::__construct($registry, SessionQuestion::class);
     }
 
-    public function save(Score $entity, bool $flush = false): void
+    public function save(SessionQuestion $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class ScoreRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Score $entity, bool $flush = false): void
+    public function remove(SessionQuestion $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class ScoreRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Score[] Returns an array of Score objects
+//     * @return SessionQuestion[] Returns an array of SessionQuestion objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class ScoreRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Score
+//    public function findOneBySomeField($value): ?SessionQuestion
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')
