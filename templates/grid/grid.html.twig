@@ -1,10 +1,16 @@
+{% set isGridAddEnabled = true %}
+
 <div class="grid">
+
+	{% if isGridAddEnabled %}
 	<div class="btnAdd-container">
 		{% block btnAdd %}
 			<a href="grid_add" class="btnAdd">
 				<span class="fa-plus btnAdd-icon">Add</span>
 			</a>
 		{% endblock %}
+	</div>		
+	{% endif %}
 
 	<div class="content-container">
 	<div class="items-container">
