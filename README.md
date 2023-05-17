@@ -1,6 +1,6 @@
 # ![Kiwiziz](public/src/logo.png)
 
-### Table des matière / Table of contents
+### Table des matières / Table of contents
 1. [Guide d'installation (&#x1F1EB;&#x1F1F7;)](#guide-dinstallation)
     1. [Prérequis](#prérequis)
     2. [Configuration](#configuration)
@@ -56,7 +56,7 @@ You must have [php](https://www.php.net/downloads) (version 8 or higher), [symfo
 
 ### Set-up
 
-* Add your php, symfony and npm installation folder to your `PATH` environment variable.
+* Add your php, symfony and npm installation folders to your `PATH` environment variable.
 
 * Go to the root of the kiwiziz directory:
     ```sh
