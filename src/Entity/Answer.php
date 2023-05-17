@@ -17,6 +17,7 @@ class Answer
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Question $question = null;
 
     #[ORM\Column(length: 255)]
@@ -26,11 +27,20 @@ class Answer
     private ?bool $correct = null;
 
     #[ORM\ManyToMany(targetEntity: SessionQuestion::class, mappedBy: 'answer')]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $sessionQuestions;
 
     public function __construct()
     {
         $this->sessionQuestions = new ArrayCollection();
+    }
+
+    // TODO : Only for testing, to remove
+    public function setId(int $id) : self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getId(): ?int
