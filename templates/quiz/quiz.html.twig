@@ -70,6 +70,7 @@
 			<input type="text" name="quizzTitle" class="title-field" value="{{ quizzTitle }}" placeholder="Title">
 		</div>
 
+        <div class='questions-container'>
 		{% for question in questions %}
 			<div class="question-container">
 				{% include "quiz/question.html.twig" %}
@@ -88,6 +89,7 @@
 				</div>
 			</div>
 		{% endfor %}
+        </div>
 
 
 		<div class="footer">
