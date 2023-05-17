@@ -2,17 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Answer;
-use App\Entity\Question;
-use App\Entity\QuestionType;
 use App\Entity\Session;
 use App\Entity\SessionQuestion;
-use App\Form\QuizFormType;
-use App\Form\QuizzFormType;
 use App\Repository\QuizzRepository;
 use App\Repository\SessionRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +65,7 @@ class SessionController extends AbstractController
         return $this->redirectToRoute('app_session', ['id' => $id, 'questionNb' => $questionNb + 1]);
     }
 
-    #[Route('/create/session/{quizId}', name: 'app_create_session', methods: ['POST'])]
+    #[Route('/create/session/{quizId}', name: 'app_create_session', methods: ['GET'])]
     public function createSession($quizId, Request $request, Security $security, QuizzRepository $quizzRepository, EntityManagerInterface $entityManager): Response
     {
         $quiz = $quizzRepository->findOneBy(['id' => $quizId]);
@@ -80,6 +74,7 @@ class SessionController extends AbstractController
         $session->setUser($security->getUser());
         $session->setStarted(new \DateTime());
         $session->setQuestionCount($quiz->getQuestions()->count());
+        $session->setAnswerCorrect(0);
 
         $entityManager->persist($session);
         $entityManager->flush();

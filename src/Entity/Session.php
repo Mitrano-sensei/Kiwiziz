@@ -18,6 +18,7 @@ class Session
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Quizz $quizz = null;
 
     #[ORM\ManyToOne(inversedBy: 'sessions')]
@@ -37,6 +38,7 @@ class Session
     private ?\DateTimeInterface $finished = null;
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionQuestion::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $sessionQuestions;
 
     public function __construct()

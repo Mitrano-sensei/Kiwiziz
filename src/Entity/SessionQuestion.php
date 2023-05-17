@@ -17,6 +17,7 @@ class SessionQuestion
 
     #[ORM\ManyToOne(inversedBy: 'sessionQuestions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Session $session = null;
 
     #[ORM\ManyToMany(targetEntity: Answer::class, inversedBy: 'sessionQuestions')]

@@ -32,9 +32,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Quizz::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $quizzes;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Session::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $sessions;
 
     public function __construct()
