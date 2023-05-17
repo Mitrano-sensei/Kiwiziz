@@ -1,4 +1,4 @@
-# Kiwiziz
+# ![Kiwiziz](public/src/logo.png)
 
 ### Table des matière / Table of contents
 1. [Guide d'installation (&#x1F1EB;&#x1F1F7;)](#guide-dinstallation)
