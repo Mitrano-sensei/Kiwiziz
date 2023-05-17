@@ -9,12 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\SecurityBundle\Security;
 use App\Repository\QuestionRepository;
 
 class CreateQuizController extends AbstractController
 {
     #[Route('/create/quiz', name: 'app_create_quiz')]
-    public function createQuiz(Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
+    public function createQuiz(Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger, Security $security): Response
     {
         $form = $this->createForm(QuizzFormType::class);
         $form->handleRequest($request);
@@ -33,7 +34,8 @@ class CreateQuizController extends AbstractController
 
         return $this->render('quiz_creation/quiz_creation.html.twig', [
             'controller_name' => 'CreateQuizController',
-            'quizForm' => $form->createView()
+            'quizForm' => $form->createView(),
+            'userConnected' => ($security->getUser() != null) ? true : false,
         ]);
     }
 }

@@ -17,6 +17,7 @@ class ListOfQuizzController extends AbstractController
         $allQuizz = $quizzRepository->findAll();
         return $this->render('list_of_quizz/index.html.twig', [
             'allQuizz' => $allQuizz,
+            'userConnected' => ($security->getUser() != null) ? true : false,
         ]);
     }
     
