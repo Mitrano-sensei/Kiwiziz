@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-
+{# 
 {% set quizzTitle = "title" %}
 {% set questionTitle = "title" %}
 {% set questionType = "list" %}
@@ -24,35 +24,37 @@
         "title": "d",
         "image": "src/1.png",
     }
-] %}
+] %} #}
 
 {% block body %}
-	<div class="session-container">
+	<form action="{{ path('app_session_post', {id: sessionId, questionNb: questionNb}) }}" method="post">
+		<div class="session-container">
 
-		<div class="title-container">
-			<span class="title">
-				{{ quizzTitle}}
-			</span>
-		</div>
+			<div class="title-container">
+				<span class="title">
+					{{ quizzTitle}}
+				</span>
+			</div>
 
-		<div class="content-container">
-			<img src="src/1.png" alt="image" class="question-image">
-			<span class="question-title">
-				{{ questionTitle}}
-			</span>
+			<div class="content-container">
+				<img src="src/1.png" alt="image" class="question-image">
+				<span class="question-title">
+					{{ questionTitle}}
+				</span>
 
-			<div class="question-container">
-				{% for answer in  answers %}
-					{% include "session/answer.html.twig" with {answer, questionType} %}
-				{% endfor %}
+				<div class="question-container">
+					{% for answer in  answers %}
+						{% include "session/answer.html.twig" with {answer, questionType} %}
+					{% endfor %}
+				</div>
+
+			</div>
+
+			<div class="submit-container">
+				<button class="submit-button" type="submit">Submit</button>
 			</div>
 
 		</div>
-
-		<div class="submit-container">
-			<button class="submit-button">Submit</button>
-		</div>
-
-	</div>
+	</form>
 
 {% endblock %}
