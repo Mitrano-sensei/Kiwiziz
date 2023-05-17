@@ -33,6 +33,14 @@ class Answer
         $this->sessionQuestions = new ArrayCollection();
     }
 
+    // TODO : Only for testing, to remove
+    public function setId(int $id) : self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
