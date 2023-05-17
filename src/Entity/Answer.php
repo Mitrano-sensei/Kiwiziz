@@ -17,6 +17,7 @@ class Answer
 
     #[ORM\ManyToOne(inversedBy: 'answers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Question $question = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +27,7 @@ class Answer
     private ?bool $correct = null;
 
     #[ORM\ManyToMany(targetEntity: SessionQuestion::class, mappedBy: 'answer')]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $sessionQuestions;
 
     public function __construct()

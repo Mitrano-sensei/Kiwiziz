@@ -27,9 +27,11 @@ class Quizz
     private ?\DateTimeInterface $created = null;
 
     #[ORM\OneToMany(mappedBy: 'quizz', targetEntity: Session::class)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $sessions;
 
     #[ORM\ManyToMany(targetEntity: Question::class, mappedBy: 'quizz')]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $questions;
 
     public function __construct()

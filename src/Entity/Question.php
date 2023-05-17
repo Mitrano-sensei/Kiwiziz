@@ -32,9 +32,11 @@ class Question
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: Answer::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $answers;
 
     #[ORM\OneToMany(mappedBy: 'question', targetEntity: SessionQuestion::class)]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private Collection $sessionQuestions;
 
     public function __construct()

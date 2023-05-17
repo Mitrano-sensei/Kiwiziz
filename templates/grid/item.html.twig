@@ -8,7 +8,7 @@
 <div class="item-container">
 	{% if isDeleteEnabled %}
 		<div class="item-delete-container">
-			<a href="delete/id" class="item-delete-link">
+			<a href="{{ path('app_quiz_delete', { id: item.id }) }}" class="item-delete-link">
 				<img src="src/delete.png" alt="delete" class="item-delete-image"/>
 			</a>
 		</div>
@@ -24,7 +24,7 @@
 
 	{% if isPlayEnabled %}
 		<div class="item-play-container">
-			<a href="play/id" class="item-play-link">
+			<a href="{{ path('app_create_session', { quizId: item.id }) }}" method="post" class="item-play-link">
 				<img src="src/play.png" alt="play" class="item-play-image"/>
 			</a>
 		</div>
@@ -33,7 +33,7 @@
 	<div class="item-title-container">
 		<p class="item-title">
 			{% block title %}
-				Title
+				{{item.title}}
 			{% endblock %}
 		</p>
 	</div>
