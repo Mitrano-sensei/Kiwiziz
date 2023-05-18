@@ -5,7 +5,7 @@
 	{% if isGridAddEnabled %}
 	<div class="btnAdd-container">
 		{% block btnAdd %}
-			<a href="grid_add" class="btnAdd">
+			<a href="{{path('app_create_quiz')}}" class="btnAdd">
 			<img src="src/add.png" alt="add" class="btnAdd-img">
 			</a>
 		{% endblock %}

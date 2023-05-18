@@ -24,7 +24,7 @@ class SessionController extends AbstractController
         $question = $quiz->getQuestions()[$questionNb];
 
         if ($question == null)
-            dd("Finished");
+            dd("Not Implemented");
 
         return $this->render('session/session.html.twig', [
             'quizTitle' => $quiz->getTitle(),
